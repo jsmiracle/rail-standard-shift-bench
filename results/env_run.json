@@ -1,0 +1,45 @@
+{
+ "time": "2026-11-23T20:36:57+09:00",
+ "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+ "platform": "Windows-11-10.0.26300-SP0",
+ "machine": "AMD64",
+ "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+ "cpu_count": 32,
+ "nvidia_smi": {
+  "query": "NVIDIA GeForce RTX 4070 Laptop GPU, 566.14, 8188 MiB, 00000000:01:00.0, [N/A]",
+  "banner": [
+   "Mon Nov 23 20:36:58 2026       ",
+   "+-----------------------------------------------------------------------------------------+",
+   "| NVIDIA-SMI 566.14                 Driver Version: 566.14         CUDA Version: 12.7     |",
+   "|-----------------------------------------+------------------------+----------------------+",
+   "| GPU  Name                  Driver-Model | Bus-Id          Disp.A | Volatile Uncorr. ECC |",
+   "| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |",
+   "|                                         |                        |               MIG M. |",
+   "|=========================================+========================+======================|",
+   "|   0  NVIDIA GeForce RTX 4070 ...  WDDM  |   00000000:01:00.0  On |                  N/A |",
+   "| N/A   38C    P8              4W /  115W |     678MiB /   8188MiB |      0%      Default |",
+   "|                                         |                        |                  N/A |",
+   "+-----------------------------------------+------------------------+----------------------+"
+  ]
+ },
+ "ram_gb": 63.7,
+ "torch": "2.14.1+cu126",
+ "transformers": "5.22.2",
+ "bitsandbytes": "0.50.2",
+ "accelerate": "1.15.0",
+ "peft": "0.21.2",
+ "huggingface_hub": "2.4.0",
+ "safetensors": "0.8.0",
+ "tokenizers": "0.23.3",
+ "torch_cuda_build": "12.6",
+ "cuda_available": true,
+ "gpu": {
+  "name": "NVIDIA GeForce RTX 4070 Laptop GPU",
+  "total_memory_gb": 8.0,
+  "capability": "8.9"
+ },
+ "cudnn": 91002,
+ "data_manifest": {
+  "items_public.jsonl": "2f6f1ce66a942d23a4df348b52e52fdfa2b5919c21c6e0e9152fd2b48b3c8474"
+ }
+}

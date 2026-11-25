@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this benchmark, please cite the repository with the commit hash you used."
+title: "rail-standard-shift-bench: unsafe passes when a language model converts railway design documents into checker conditions under amended standards (pre-registered pilot)"
+type: dataset
+authors:
+  - name: "The rail-standard-shift-bench authors"
+date-released: "2026-11-25"
+url: "https://github.com/jsmiracle/rail-standard-shift-bench"
+repository-code: "https://github.com/jsmiracle/rail-standard-shift-bench"
+license:
+  - MIT
+  - CC-BY-4.0
+keywords:
+  - railway alignment design
+  - design standard
+  - language model evaluation
+  - rule checking
+  - unsafe pass

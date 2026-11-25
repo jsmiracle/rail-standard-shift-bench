@@ -1,0 +1,8 @@
+{
+ "note": "SHA-256 of the benchmark files. items.jsonl and gold.jsonl are byte-identical to the files fixed by the pre-registration (2026-11-21).",
+ "sha256": {
+  "items.jsonl": "2f6f1ce66a942d23a4df348b52e52fdfa2b5919c21c6e0e9152fd2b48b3c8474",
+  "gold.jsonl": "5f95e30e9bf947789dcf5d22e09583466db1c4bc85e6475c7e5daaf1b0b2b740",
+  "official_values.json": "db3917790bb3f80a27d22561608fcce49388780b975568a19aa672c5f5a1ddf1"
+ }
+}

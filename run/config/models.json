@@ -1,0 +1,70 @@
+{
+ "_comment": "Untrained baselines on the document -> condition task. Model revisions are pinned (Hugging Face commit hashes) as in the published run.",
+ "models": [
+  {
+   "tag": "qwen3_8b",
+   "repo": "Qwen/Qwen3-8B",
+   "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+   "licence": "apache-2.0",
+   "arch": "Qwen3ForCausalLM (hybrid thinking; thinking switched off by chat template)",
+   "role": "primary model of P3 (planned base-model size class of the main study)",
+   "variants": [
+    "V0",
+    "V1",
+    "V1SC"
+   ]
+  },
+  {
+   "tag": "qwen3_4b_2507",
+   "repo": "Qwen/Qwen3-4B-Instruct-2507",
+   "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+   "licence": "apache-2.0",
+   "arch": "Qwen3ForCausalLM",
+   "role": "comparison (same model as P2)",
+   "variants": [
+    "V0",
+    "V1"
+   ]
+  },
+  {
+   "tag": "qwen35_2b",
+   "repo": "Qwen/Qwen3.5-2B",
+   "revision": "15852e8c16360a2fea060d615a32b45270f8a8fc",
+   "licence": "apache-2.0",
+   "arch": "Qwen3_5ForConditionalGeneration",
+   "role": "comparison (same model as P2)",
+   "variants": [
+    "V0",
+    "V1"
+   ]
+  }
+ ],
+ "quantization": {
+  "load_in_4bit": true,
+  "bnb_4bit_quant_type": "nf4",
+  "bnb_4bit_use_double_quant": true,
+  "bnb_4bit_compute_dtype": "bfloat16"
+ },
+ "generation": {
+  "greedy": {
+   "do_sample": false,
+   "num_beams": 1,
+   "repetition_penalty": 1.0,
+   "max_new_tokens": 256
+  },
+  "self_consistency": {
+   "n": 5,
+   "do_sample": true,
+   "temperature": 0.7,
+   "top_p": 0.9,
+   "top_k": 0,
+   "max_new_tokens": 256,
+   "seed_base": 1000
+  },
+  "chat_template_kwargs": {
+   "enable_thinking": false
+  },
+  "seed": 0
+ },
+ "items_file": "data/items.jsonl"
+}

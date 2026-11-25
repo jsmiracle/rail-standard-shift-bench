@@ -1,0 +1,23 @@
+{
+ "note": "Current official limit values of the 18 project contexts (rule | design speed km/h | track type), taken from the gold values of the 18 C items (current clauses). Used only by the sensitivity analysis.",
+ "values": {
+  "R-06-01|200|ballast": 1900.0,
+  "R-06-01|200|slab": 1600.0,
+  "R-06-01|250|ballast": 2900.0,
+  "R-06-01|250|slab": 2400.0,
+  "R-07-01|250|ballast": 160.0,
+  "R-07-01|250|slab": 180.0,
+  "R-09-01|200|ballast": 100.0,
+  "R-09-01|250|ballast": 130.0,
+  "R-10-01|200|slab": 25.0,
+  "R-10-01|250|ballast": 25.0,
+  "R-11-02|200|ballast": 14000.0,
+  "R-11-02|200|slab": 14000.0,
+  "R-11-02|250|ballast": 22000.0,
+  "R-11-02|250|slab": 22000.0,
+  "R-11-04|250|ballast": 25000.0,
+  "R-11-04|250|slab": 40000.0,
+  "R-11-05|200|ballast": 20.0,
+  "R-11-05|250|ballast": 20.0
+ }
+}
