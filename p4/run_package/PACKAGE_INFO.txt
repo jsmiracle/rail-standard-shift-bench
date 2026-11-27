@@ -1,0 +1,148 @@
+p4_run_package - built 2026-11-26 (decision D-210). Pre-registration: research/pilot_P4/PREREG_P4_ko.md
+(decision D-210; its commit hash is in P4_COMMIT.txt: 7e882bc7b5ee6f2e9bd552eeb64be1bd03b6ee02).
+Specification: research/pilot_P4/SPEC_run_package.md. Start: README_RU.md (one PowerShell command, run_all_windows.ps1).
+What the first run should look like, stage by stage: tests/FIRST_RUN_CHECKLIST.md.
+
+What it does on the notebook (RTX 4070 Laptop 8 GB, Windows 11, Python environment C:\p2\.venv, model cache C:\p2\hf_cache):
+  part 0  44 closed-book questions, Qwen3-8B (4-bit), greedy
+  part 1  untrained baseline on changed standards tables: Qwen3-8B V1; Qwen3-4B-Instruct-2507 V1 and V2 (414 items per variant)
+  part 2  supervised QLoRA fine-tuning of Qwen3-4B on other tables (450 rows, 3 epochs, seeds 1, 2, 3), each followed by V2 inference
+  part 3  reward-learning PROCEDURE CHECK (150 steps, group 6, reward = checker verdict); no effect is claimed, no adapter is kept
+          (before its first step the update path is tried once on a real sequence: forward and backward, no optimizer step;
+           log field "preflight_update". A smoke run whose groups all have equal rewards would otherwise never execute it.)
+Peak GPU memory in the logs: the one-off loss-path check (full logits of one sequence) has its own fields
+  loss_path_check.peak_vram_*, and the reward check's preflight has preflight_update.peak_vram_*; the counters are reset
+  after them, so peak_vram_allocated_gb / peak_vram_reserved_gb of a fine-tuning log are those of training (its memory
+  test on the longest sequence included) and those of a reward-check log are those of sampling and updating.
+Nothing is scored on the notebook. The package holds no gold answers of the test items, no scorer and no verification engine.
+train.jsonl holds the gold of the TRAINING tables only (supervised targets and reward); training and test tables share no value.
+Full runs refuse to start without P4_COMMIT.txt (first line: 40-hex hash of the pre-registration commit, lower case).
+Smoke tests (--limit) are allowed without it. The data files are checked against data/MANIFEST.json before every stage.
+
+Choices made in the scripts that the frozen settings file does not fix (config/p4_config.json belongs to the
+pre-registration commit and was NOT changed; these belong in the decisions log before the run):
+  - Reward check, sampling: top_k=0 is passed explicitly. transformers 5.22.2 otherwise fills in its default top_k=50
+    (generation/configuration_utils.py, _get_default_generation_params), which would not be a sample from the full
+    softmax at temperature 1.0 and top_p 1.0. Every log records it (sampling_kwargs).
+  - Reward check, advantage: (reward - group mean) / (sample standard deviation with n-1 + 1e-4). Log field std_kind.
+  - Fine-tuning, schedule: lr*(step+1)/10 for the first 10 steps (step counted from 0), then lr*(169-step)/159. Log field lr_schedule.
+  - Preparation for training: "lean" (explicit freezing and gradient checkpointing; the tied embedding / output matrix stays
+    bfloat16) instead of peft.prepare_model_for_kbit_training, which makes a float32 copy of it. The peft helper is the
+    fallback of the fine-tuning smoke test only; the reward check always uses lean.
+  - Loss: decoder hidden states + LM head on the answer positions only. Checked against the plain full-logits loss on one
+    sequence before training; on the real backend the run stops if the two differ (the plain path does not fit into 8 GB).
+  - Reward check: update preflight before the first step (see part 3 above).
+  - Fine-tuning and reward check (not inference): GPU memory limit, torch.cuda.set_per_process_memory_fraction =
+    (memory PyTorch holds after loading + free memory of the card - 0.3 GB) / total, never below 0.78. Log field vram_cap.
+  - Inference with an adapter: the adapter is attached with PeftModel.from_pretrained and NOT merged into the 4-bit weights.
+
+Error fixes after the code review and the dry run of 2026-11-26 (no setting and no data file changed):
+  1. grpo_check.py: a run in which no step succeeded, and a smoke run on the real backend with any failed step, now end with
+     a non-zero exit code (before: FINISHED / exit 0 unless five steps failed in a row; the two-step smoke test could not fail).
+  2. run_all_windows.ps1: both reward-check stages pass --prep lean (before: the fallback preparation of the fine-tuning
+     smoke test, which needs about 6.6 GB there and would crawl in shared system memory on Windows).
+  3. train_sft.py, grpo_check.py: the real backend stops with LOSS PATHS DISAGREE / ANSWER-ONLY LOSS PATH NOT AVAILABLE
+     instead of switching to the full-logits loss path (about 3 GB more than the GPU has). Deviation from specification
+     section 5 ("fall back to the plain call"); the developer backend keeps the fallback.
+  4. common.cap_vram (new), used by train_sft.py and grpo_check.py: the GPU memory limit described above, so that a
+     shortage is an out-of-memory error and not a slow run. NOT yet run on the notebook.
+  5. grpo_check.py: peak-memory counters reset after the preflight; cached blocks released before every sampling phase;
+     free GPU memory and failed steps in the progress line; log field vram_free_gb_at_progress (also in train_sft.py).
+     common.vram_note warns when less than 0.3 GB of GPU memory is free (before: when 7 of 8 GB were reserved).
+  6. run_all_windows.ps1: a fine-tuning stage that failed is started once more (stages f4b / f6b / f8b ..._retry); train_sft.py
+     continues from its last checkpoint. results/status.json then holds "sft_sN_first_try": "failed".
+  7. Expected times: 7 to 10 hours in total (README_RU.md, run_all_windows.ps1); inference with an adapter is planned with
+     a factor of 1.7 (common.EST adapter_infer_factor, env_report.py plan, run_infer.py expected time). An estimate.
+  8. pack_results.py: the Russian summary counts prompts that still have no answer (before: every line of the append-only
+     errors file); in a test mode it says that nothing has to be sent when everything is done.
+  9. README_RU.md: rehearsal step (run_all_windows.ps1 -Backend mock), because the ps1 has never run under PowerShell.
+  Earlier the same day (dry-run tester): the update preflight of the reward check; separate peak-memory fields for the
+  one-off loss-path check.
+  Review findings that were NOT applied: the preflight on the longest prompt with a 256-token answer (the first prompt with
+  its supervised answer is kept: sampling, not the update, is the largest moment, and single long steps are caught by the
+  per-step handler); no change to config/p4_config.json (frozen).
+
+Hashes (sha256) of the frozen package; tests/run_mock_tests.py fails if one of them no longer matches its file:
+  data/MANIFEST.json            bedf254707b1ea1dc2e5aac366535d18d355529008d0402ca91e2782c42f74d1
+  config/p4_config.json         b282c4cc3a30aa1f1fe4cb6051980379aafb60d7f6263b1dd80695c86c4d15e9
+  run_all_windows.ps1           1a34da834729f3ea4574ef4c1a66d4a2407692165803e8b4fc5f988a8aba82f8
+  scripts/common.py             c959514b92ed67b5482ea450d6b22631792f04591df3bb4846142f6b22d869fc
+  scripts/run_infer.py          4646eb98341f8818dd9b49996c3387625ec7141d52233361ce5abbfd04cdf1e1
+  scripts/train_sft.py          8cc6ee83b4b793b4559acfa0af4d9c33b53936841d5d59dc0dd6de194e33479b
+  scripts/grpo_check.py         6dc1755188d47e4c5daf1dfd279df7f925474a2f097abb545a4cd1ae1b100102
+  scripts/railcheck.py          f4c0ca523c6312d462a86c0c639b3159cbb246c6d6dfba48cf7b5b3c9e8b3d6f
+  scripts/env_report.py         85308c888599165ad0f4ca7f3d668e2f1963b3c8d7fcf808bf05e396133b3b13
+  scripts/pack_results.py       dc63531b286268e32c77a78b2f30819c525519be2ddbfd31c7ad4b31c1fe8caf
+  P4_COMMIT.txt                 88c69d03b36c49861862d41b33f69dc31989acb01c99590e2f3a2cc6731f9276
+  zip sent to the notebook      recorded in research/DECISIONS_LOG.md, D-210 (a zip cannot hold its own hash);
+                                the zip holds this folder without tests/ (nothing in the run imports tests/)
+  (every run also records the hashes of the scripts and of the config in its own log: field "package_files";
+   README_RU.md and this file are not listed, so their wording can still be adjusted)
+  To refresh after an edit:  shasum -a 256 data/MANIFEST.json config/p4_config.json run_all_windows.ps1 scripts/*.py P4_COMMIT.txt
+
+Verified on the Mac on 2026-11-26 (Intel, no GPU), on the files with the hashes above:
+  tests/run_mock_tests.py (Python 3.12.14, standard library only; torch, transformers, peft made unimportable): all checks passed.
+    Every stage command is read from run_all_windows.ps1 and run with --backend mock on tests/fixtures: output files and fields,
+    resume, error paths, guards (data manifest, commit file, developer overrides), zip, reward and advantage arithmetic,
+    the exit code of a reward-check run without a good step, the memory-limit arithmetic against a stand-in for torch.cuda,
+    the retry stages and the literal lean preparation of the reward-check stages, the commands and stage names of README_RU.md.
+  The same stage commands with --backend mock on a full copy of the package with the REAL data files and no developer
+    overrides, in the order and with the gates of run_all_windows.ps1: every stage exit code 0 (environment report 2: no GPU),
+    44 + 414 + 414 + 414 + 3 x 414 saved rows, three fine-tuning logs of 169 steps, a reward-check log of 150 steps, zip written.
+  tests/run_tiny_tests.py, all checks passed in two CPU environments, both with the tokenizer of the pinned model revisions:
+    (a) torch 2.2.2, transformers 4.46.3, peft 0.12.0 (tiny random model built from the Qwen2 classes);
+    (b) the notebook's versions transformers 5.22.2, peft 0.21.2, tokenizers 0.23.3, huggingface_hub 2.4.0, accelerate 1.15.0,
+        safetensors 0.8.0 (tiny random model built from the Qwen3 classes) on top of torch 2.2.2 with a test-only shim that
+        fills in the torch functions transformers 5 expects from torch >= 2.6. torch 2.14.1 and bitsandbytes were NOT involved.
+    Checked there: the same stage commands with --backend tiny; LoRA with non-reentrant gradient checkpointing; the answer-only
+    loss equals the plain full-logits loss; the gradient reaches the first layer; an interrupted fine-tuning run resumes to a
+    bit-identical adapter; a saved adapter reproduces the trained loss after reloading; a reward update lowers the group loss;
+    a failed step is survived; a too long sequence stops the run; the dtype layout of the real run (bfloat16 base model,
+    float32 LoRA matrices, default preparation) trains, samples six completions in one call and reloads on the tiny model.
+    Environment (b) is described in tests/dev_pinned_env/sitecustomize.py.
+    White-box checks (same two environments): train_sft.main() and grpo_check.main() run inside the test process and
+    a second, independent copy of the tiny model recomputes everything the plain way (full forward pass, log-softmax, autograd,
+    no gradient checkpointing). Equal to that reference: the answer-only loss of every training call, the gradient that reaches
+    the optimizer in every step, the logged loss, gradient norm and learning rate; in the reward check the tokens that enter the
+    loss (prompt + sampled completion up to its first EOS, no padding), the rewards (rule of the specification written again
+    without railcheck), the group loss and the accumulated gradient. Also: only LoRA tensors are trained and the base weights
+    stay bit-identical; the first update has the size of the warm-up learning rate; a reloaded adapter gives bit-identical
+    logits and run_infer.py writes exactly its greedy text; every greedily generated token is the most probable next token;
+    equal rewards make no update; a torch.cuda.OutOfMemoryError raised by the test while sampling and in the middle of an
+    update is logged and leaves no gradient behind; two EOS ids as in the real models end an answer at whichever comes first;
+    a second run of every stage rewrites no file. 21 bugs planted one at a time in a scratch copy (mutation check, old
+    library versions, before the review fixes) were each caught by these checks.
+    The real data files, read only: formats of specification section 3, every supervised answer scores 1.0, no item id shared
+    between training and test file, and the smoke commands of run_all_windows.ps1 run on them with the tiny model.
+  Data of 2026-11-26 (train.jsonl sha256 ac913327...) with the pinned tokenizer: training sequences 810 to 1,160 tokens
+    (max_length 1,536), test prompts V1 2,269 to 2,576 and V2 736 to 1,043 tokens; the gold answer of each of the 450 training rows
+    gets reward 1.0 from the reward function.
+  Read in the sources of the pinned versions (not executed on the GPU): bitsandbytes 0.50.2 Linear4bit and matmul_4bit;
+    peft 0.21.2 prepare_model_for_kbit_training and the 4-bit LoRA layer; transformers 5.22.2 Qwen3ForCausalLM.forward and the
+    sampling defaults; torch 2.14.1 torch/cuda/memory.py and c10/cuda/CUDACachingAllocator.cpp (with a memory fraction set, an
+    allocation over the limit first releases the cached blocks and then raises "CUDA out of memory ... allowed;").
+  With bitsandbytes 0.50.2 itself on the CPU (its pure-PyTorch kernels, a tiny Qwen3 model loaded 4-bit NF4 through the same
+    from_pretrained call; scratch probe of the reviewer, run again on these files): train_sft.py (three steps, checkpoint,
+    adapter saved), run_infer.py with that adapter and grpo_check.py (two steps, each with an update that lowers the group
+    loss) run end to end with the default preparation. With the peft helper the embedding and the hidden states become
+    float32 there, with the default preparation they stay bfloat16.
+  Fine-tuning, reward check and inference with an adapter give the same adapter file, the same sampled answers and the same
+    outputs as before the review fixes (tiny model, same seeds): the fixes changed no computation.
+
+NOT verified (the notebook cannot be reached from the Mac; nothing below ran on the GPU):
+  run_all_windows.ps1 was never executed (no PowerShell on the Mac): only static checks and its stage commands run from Python.
+    The rehearsal of README_RU.md step 2 is its first execution. (The coordinator downloaded PowerShell 7.6.10 for macOS to
+    try it on 2026-11-26, checksum equal to the published one; running a downloaded binary was not permitted in that
+    session, so it was deleted unused.)
+  torch 2.14.1+cu126 and the CUDA kernels of bitsandbytes 0.50.2 cannot be installed on the Mac (Intel macOS has no torch above 2.2.2).
+  4-bit loading together with LoRA on CUDA, the backward pass through the 4-bit layers on CUDA, bfloat16 training on CUDA,
+    checkpoint and resume on CUDA, generation with num_return_sequences on CUDA.
+  VRAM peaks of fine-tuning and of the reward check; every expected time for fine-tuning, for inference with an adapter and
+    for the reward check is an assumption.
+  The GPU memory limit (common.cap_vram): its arithmetic ran against a stand-in for torch.cuda only. What
+    torch.cuda.mem_get_info reports on this notebook has never been recorded; if it reported far too little, the limit
+    would be its floor (0.78 of the card = 6.24 GB), which is still above the estimated need of both training stages.
+  The Windows-only helper (no-sleep request, QuickEdit switch) was run against a stand-in for kernel32 only.
+  The reset of the peak-memory counters (CUDA only) was run against a stand-in for torch.cuda only; a real CUDA out-of-memory
+    error was never produced (the tests raise torch.cuda.OutOfMemoryError themselves).
+  The fallback preparation (--prep kbit_helper) on CUDA and the fallback loader of run_p3.py were not exercised.

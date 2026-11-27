@@ -1,0 +1,112 @@
+{
+ "_comment": "P4: baseline on changed standards tables, supervised QLoRA fine-tuning (3 seeds), reward-learning procedure check. Model revisions pinned as in P3.",
+ "models": [
+  {
+   "tag": "qwen3_8b",
+   "repo": "Qwen/Qwen3-8B",
+   "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+   "licence": "apache-2.0",
+   "arch": "Qwen3ForCausalLM (hybrid thinking; thinking switched off by chat template)",
+   "role": "primary model of P3 (planned base-model size class of the main study)",
+   "variants": [
+    "V1"
+   ]
+  },
+  {
+   "tag": "qwen3_4b_2507",
+   "repo": "Qwen/Qwen3-4B-Instruct-2507",
+   "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+   "licence": "apache-2.0",
+   "arch": "Qwen3ForCausalLM",
+   "role": "comparison (same model as P2)",
+   "variants": [
+    "V1",
+    "V2"
+   ]
+  }
+ ],
+ "quantization": {
+  "load_in_4bit": true,
+  "bnb_4bit_quant_type": "nf4",
+  "bnb_4bit_use_double_quant": true,
+  "bnb_4bit_compute_dtype": "bfloat16"
+ },
+ "generation": {
+  "greedy": {
+   "do_sample": false,
+   "num_beams": 1,
+   "repetition_penalty": 1.0,
+   "max_new_tokens": 256
+  },
+  "chat_template_kwargs": {
+   "enable_thinking": false
+  },
+  "seed": 0
+ },
+ "sft": {
+  "model_tag": "qwen3_4b_2507",
+  "seeds": [
+   1,
+   2,
+   3
+  ],
+  "lora_r": 16,
+  "lora_alpha": 32,
+  "lora_dropout": 0.05,
+  "target_modules": [
+   "q_proj",
+   "k_proj",
+   "v_proj",
+   "o_proj",
+   "gate_proj",
+   "up_proj",
+   "down_proj"
+  ],
+  "learning_rate": 0.0002,
+  "epochs": 3,
+  "micro_batch": 1,
+  "grad_accum": 8,
+  "max_length": 1536,
+  "warmup_steps": 10,
+  "weight_decay": 0.0,
+  "max_grad_norm": 1.0,
+  "train_file": "data/train.jsonl"
+ },
+ "reward_check": {
+  "model_tag": "qwen3_4b_2507",
+  "steps": 150,
+  "group": 6,
+  "temperature": 1.0,
+  "top_p": 1.0,
+  "max_new_tokens": 256,
+  "learning_rate": 5e-05,
+  "max_grad_norm": 1.0,
+  "seed": 7,
+  "lora_r": 16,
+  "lora_alpha": 32,
+  "lora_dropout": 0.0,
+  "target_modules": [
+   "q_proj",
+   "k_proj",
+   "v_proj",
+   "o_proj",
+   "gate_proj",
+   "up_proj",
+   "down_proj"
+  ],
+  "weights": {
+   "match": 1.0,
+   "unsafe": -4.0,
+   "false_alarm": -1.0,
+   "abstain": -0.25,
+   "unusable": -1.0
+  },
+  "train_file": "data/train.jsonl"
+ },
+ "files": {
+  "items_test": "data/items_test.jsonl",
+  "smoke_test": "data/smoke_test.jsonl",
+  "smoke_train": "data/smoke_train.jsonl",
+  "closedbook": "data/closedbook_items.jsonl"
+ }
+}

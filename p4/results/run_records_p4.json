@@ -1,0 +1,315 @@
+{
+ "note": "P4 run records without personal fields (D-216). Raw outputs and logs stay outside git.",
+ "status": {
+  "started": "2026-11-26 16:25:49",
+  "backend": "hf",
+  "prep": "lean",
+  "closedbook_8b": "ok",
+  "base_8b_v1": "ok",
+  "base_4b_v1v2": "ok",
+  "sft_s1": "ok",
+  "eval_sft_s1": "ok",
+  "sft_s2": "ok",
+  "eval_sft_s2": "ok",
+  "sft_s3": "ok",
+  "eval_sft_s3": "ok",
+  "grpo": "ok",
+  "finished": "2026-11-26 23:57:51"
+ },
+ "env": {
+  "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "torch": "2.14.1+cu126",
+  "transformers": "5.22.2",
+  "peft": "0.21.2",
+  "bitsandbytes": "0.50.2",
+  "accelerate": "1.15.0",
+  "torch_cuda_build": "12.6",
+  "prereg_commit": "7e882bc7b5ee6f2e9bd552eeb64be1bd03b6ee02",
+  "gpu": {
+   "name": "NVIDIA GeForce RTX 4070 Laptop GPU",
+   "total_memory_gb": 8.0,
+   "capability": "8.9"
+  }
+ },
+ "sft": {
+  "sft_s1": {
+   "label": "full",
+   "finished": true,
+   "seed": 1,
+   "prep": "lean",
+   "train_sha256": "ac913327832846cecf63eb57bafa3fd6e288810a3a571b4579dfb67ee0a0e3d2",
+   "n_rows": 450,
+   "n_optimizer_steps": 169,
+   "n_sequences": 1350,
+   "wall_seconds": 2181.1,
+   "peak_vram_allocated_gb": 3.579,
+   "peak_vram_reserved_gb": 4.066,
+   "settings": {
+    "model_tag": "qwen3_4b_2507",
+    "seeds": [
+     1,
+     2,
+     3
+    ],
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05,
+    "target_modules": [
+     "q_proj",
+     "k_proj",
+     "v_proj",
+     "o_proj",
+     "gate_proj",
+     "up_proj",
+     "down_proj"
+    ],
+    "learning_rate": 0.0002,
+    "epochs": 3,
+    "micro_batch": 1,
+    "grad_accum": 8,
+    "max_length": 1536,
+    "warmup_steps": 10,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "train_file": "data/train.jsonl"
+   },
+   "preflight_longest_sequence": {
+    "tokens": 1160,
+    "loss": 0.17436471581459045,
+    "seconds": 1.896,
+    "peak_vram_allocated_gb": 3.207,
+    "peak_vram_reserved_gb": 3.486,
+    "grad_flow": {
+     "n_trainable_tensors": 504,
+     "n_with_nonzero_grad": 252,
+     "first_layer_has_grad": true,
+     "example": "base_model.model.model.layers.0.self_attn.q_proj.lora_B.default.weight"
+    }
+   },
+   "vram_cap": {
+    "fraction": 0.822,
+    "limit_gb": 6.57,
+    "floor": 0.78,
+    "keep_free_gb": 0.3,
+    "free_gb_before": 4.34,
+    "reserved_gb_before": 2.53,
+    "total_gb": 8.0,
+    "error": null
+   },
+   "stop_reason": null
+  },
+  "sft_s2": {
+   "label": "full",
+   "finished": true,
+   "seed": 2,
+   "prep": "lean",
+   "train_sha256": "ac913327832846cecf63eb57bafa3fd6e288810a3a571b4579dfb67ee0a0e3d2",
+   "n_rows": 450,
+   "n_optimizer_steps": 169,
+   "n_sequences": 1350,
+   "wall_seconds": 2230.5,
+   "peak_vram_allocated_gb": 3.578,
+   "peak_vram_reserved_gb": 4.066,
+   "settings": {
+    "model_tag": "qwen3_4b_2507",
+    "seeds": [
+     1,
+     2,
+     3
+    ],
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05,
+    "target_modules": [
+     "q_proj",
+     "k_proj",
+     "v_proj",
+     "o_proj",
+     "gate_proj",
+     "up_proj",
+     "down_proj"
+    ],
+    "learning_rate": 0.0002,
+    "epochs": 3,
+    "micro_batch": 1,
+    "grad_accum": 8,
+    "max_length": 1536,
+    "warmup_steps": 10,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "train_file": "data/train.jsonl"
+   },
+   "preflight_longest_sequence": {
+    "tokens": 1160,
+    "loss": 0.17436471581459045,
+    "seconds": 1.857,
+    "peak_vram_allocated_gb": 3.207,
+    "peak_vram_reserved_gb": 3.486,
+    "grad_flow": {
+     "n_trainable_tensors": 504,
+     "n_with_nonzero_grad": 252,
+     "first_layer_has_grad": true,
+     "example": "base_model.model.model.layers.0.self_attn.q_proj.lora_B.default.weight"
+    }
+   },
+   "vram_cap": {
+    "fraction": 0.822,
+    "limit_gb": 6.57,
+    "floor": 0.78,
+    "keep_free_gb": 0.3,
+    "free_gb_before": 4.34,
+    "reserved_gb_before": 2.53,
+    "total_gb": 8.0,
+    "error": null
+   },
+   "stop_reason": null
+  },
+  "sft_s3": {
+   "label": "full",
+   "finished": true,
+   "seed": 3,
+   "prep": "lean",
+   "train_sha256": "ac913327832846cecf63eb57bafa3fd6e288810a3a571b4579dfb67ee0a0e3d2",
+   "n_rows": 450,
+   "n_optimizer_steps": 169,
+   "n_sequences": 1350,
+   "wall_seconds": 2177.0,
+   "peak_vram_allocated_gb": 3.578,
+   "peak_vram_reserved_gb": 4.066,
+   "settings": {
+    "model_tag": "qwen3_4b_2507",
+    "seeds": [
+     1,
+     2,
+     3
+    ],
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05,
+    "target_modules": [
+     "q_proj",
+     "k_proj",
+     "v_proj",
+     "o_proj",
+     "gate_proj",
+     "up_proj",
+     "down_proj"
+    ],
+    "learning_rate": 0.0002,
+    "epochs": 3,
+    "micro_batch": 1,
+    "grad_accum": 8,
+    "max_length": 1536,
+    "warmup_steps": 10,
+    "weight_decay": 0.0,
+    "max_grad_norm": 1.0,
+    "train_file": "data/train.jsonl"
+   },
+   "preflight_longest_sequence": {
+    "tokens": 1160,
+    "loss": 0.17436471581459045,
+    "seconds": 1.87,
+    "peak_vram_allocated_gb": 3.207,
+    "peak_vram_reserved_gb": 3.486,
+    "grad_flow": {
+     "n_trainable_tensors": 504,
+     "n_with_nonzero_grad": 252,
+     "first_layer_has_grad": true,
+     "example": "base_model.model.model.layers.0.self_attn.q_proj.lora_B.default.weight"
+    }
+   },
+   "vram_cap": {
+    "fraction": 0.822,
+    "limit_gb": 6.57,
+    "floor": 0.78,
+    "keep_free_gb": 0.3,
+    "free_gb_before": 4.34,
+    "reserved_gb_before": 2.53,
+    "total_gb": 8.0,
+    "error": null
+   },
+   "stop_reason": null
+  }
+ },
+ "grpo": {
+  "label": "PROCEDURE CHECK - no effect is claimed. full",
+  "finished": true,
+  "settings": {
+   "model_tag": "qwen3_4b_2507",
+   "steps": 150,
+   "group": 6,
+   "temperature": 1.0,
+   "top_p": 1.0,
+   "max_new_tokens": 256,
+   "learning_rate": 5e-05,
+   "max_grad_norm": 1.0,
+   "seed": 7,
+   "lora_r": 16,
+   "lora_alpha": 32,
+   "lora_dropout": 0.0,
+   "target_modules": [
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj",
+    "gate_proj",
+    "up_proj",
+    "down_proj"
+   ],
+   "weights": {
+    "match": 1.0,
+    "unsafe": -4.0,
+    "false_alarm": -1.0,
+    "abstain": -0.25,
+    "unusable": -1.0
+   },
+   "train_file": "data/train.jsonl"
+  },
+  "steps_requested": 150,
+  "train_sha256": "ac913327832846cecf63eb57bafa3fd6e288810a3a571b4579dfb67ee0a0e3d2",
+  "sampling_kwargs": {
+   "do_sample": true,
+   "temperature": 1.0,
+   "top_p": 1.0,
+   "top_k": 0,
+   "num_beams": 1,
+   "max_new_tokens": 256,
+   "num_return_sequences": 6,
+   "pad_token_id": 151643
+  },
+  "std_kind": "sample standard deviation (n-1) of the group rewards",
+  "group_loss": "mean over the group of -advantage_i * mean log-probability of the sampled tokens (EOS included)",
+  "optimizer": "torch.optim.AdamW, betas (0.9, 0.999), eps 1e-8, weight decay 0",
+  "adapter_saved": false,
+  "prereg_commit": "7e882bc7b5ee6f2e9bd552eeb64be1bd03b6ee02",
+  "reportable": true,
+  "summary": {
+   "steps_requested": 150,
+   "steps_done": 150,
+   "steps_failed": 0,
+   "zero_variance_groups": 141,
+   "share_zero_variance": 0.94,
+   "updates": 9,
+   "mean_reward_first_30": 0.4731,
+   "n_steps_in_first": 30,
+   "mean_reward_last_30": 0.45,
+   "n_steps_in_last": 30,
+   "seconds_per_step_mean": 14.6862,
+   "seconds_generate_mean": 14.1059,
+   "seconds_update_mean": 9.6682,
+   "share_ok": 0.9911,
+   "share_abstain": 0.0,
+   "share_unusable": 0.0089,
+   "note": "procedure check: no effect is claimed from these numbers",
+   "peak_vram_allocated_gb": 4.601,
+   "peak_vram_reserved_gb": 5.447
+  },
+  "wall_seconds": 2218.5,
+  "peak_vram_allocated_gb": 4.601,
+  "peak_vram_reserved_gb": 5.447,
+  "stop_reason": null,
+  "error": null,
+  "trainable_params": 33030144
+ }
+}

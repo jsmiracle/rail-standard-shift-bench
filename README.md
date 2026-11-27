@@ -7,6 +7,8 @@ A small pre-registered benchmark: 90 design-condition documents (Korean), 540 ch
 [한국어 README](README.ko.md) · [Pre-registration](PREREGISTRATION.md) · [Reproduce in one command](#reproduce-the-numbers) · [Licence](#licence-and-sources)
 
 > **Status: pilot study, November 2026.** By the rule fixed before the run, the main result is **inconclusive**. Please read [What the result shows and does not show](#what-the-result-shows-and-does-not-show) before quoting a number.
+>
+> **Follow-up pilot P4 (run 2026-11-26):** standards tables with changed values, supervised fine-tuning of a small model on other tables, and a check that the reward-learning procedure runs. Data, scorer, per-item results and a reproduction script are in [`p4/`](p4/README.md).
 
 ![How a condition reaches the checker, and what goes wrong](docs/pipeline_en.svg)
 

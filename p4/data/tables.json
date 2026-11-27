@@ -1,0 +1,322 @@
+{
+ "TR1": {
+  "split": "train",
+  "factors": {
+   "g06": 0.8,
+   "g07": 0.9,
+   "g09": 1.1,
+   "g115": 1.2
+  },
+  "dates": {
+   "eff": "2028년 3월 1일",
+   "issued": "2028년 2월 1일",
+   "before": "2027년 11월 20일",
+   "after": "2028년 5월 9일"
+  },
+  "values": {
+   "constants.L9_min_m": 22.0,
+   "constants.L_vc_min_m": 24.0,
+   "tables.T-06-01.columns.ballast[V=150]": 900.0,
+   "tables.T-06-01.columns.ballast[V=200]": 1500.0,
+   "tables.T-06-01.columns.ballast[V=250]": 2300.0,
+   "tables.T-06-01.columns.ballast[V=300]": 3600.0,
+   "tables.T-06-01.columns.slab[V=150]": 720.0,
+   "tables.T-06-01.columns.slab[V=200]": 1300.0,
+   "tables.T-06-01.columns.slab[V=250]": 1900.0,
+   "tables.T-06-01.columns.slab[V=300]": 2800.0,
+   "tables.T-07-01.bands[0,250].ballast.C_max": 140.0,
+   "tables.T-07-01.bands[0,250].ballast.Cd_max": 90.0,
+   "tables.T-07-01.bands[0,250].slab.C_max": 160.0,
+   "tables.T-07-01.bands[0,250].slab.Cd_max": 120.0,
+   "tables.T-07-01.bands[250,350].ballast.C_max": 140.0,
+   "tables.T-07-01.bands[250,350].ballast.Cd_max": 72.0,
+   "tables.T-07-01.bands[250,350].slab.C_max": 160.0,
+   "tables.T-07-01.bands[250,350].slab.Cd_max": 120.0,
+   "tables.T-09-01.values[V=200]": 110.0,
+   "tables.T-09-01.values[V=250]": 140.0
+  }
+ },
+ "TR2": {
+  "split": "train",
+  "factors": {
+   "g06": 0.9,
+   "g07": 1.1,
+   "g09": 1.2,
+   "g115": 1.3
+  },
+  "dates": {
+   "eff": "2028년 9월 15일",
+   "issued": "2028년 8월 14일",
+   "before": "2028년 9월 3일",
+   "after": "2028년 9월 26일"
+  },
+  "values": {
+   "constants.L9_min_m": 24.0,
+   "constants.L_vc_min_m": 26.0,
+   "tables.T-06-01.columns.ballast[V=150]": 1000.0,
+   "tables.T-06-01.columns.ballast[V=200]": 1700.0,
+   "tables.T-06-01.columns.ballast[V=250]": 2600.0,
+   "tables.T-06-01.columns.ballast[V=300]": 4100.0,
+   "tables.T-06-01.columns.slab[V=150]": 810.0,
+   "tables.T-06-01.columns.slab[V=200]": 1400.0,
+   "tables.T-06-01.columns.slab[V=250]": 2200.0,
+   "tables.T-06-01.columns.slab[V=300]": 3200.0,
+   "tables.T-07-01.bands[0,250].ballast.C_max": 180.0,
+   "tables.T-07-01.bands[0,250].ballast.Cd_max": 110.0,
+   "tables.T-07-01.bands[0,250].slab.C_max": 200.0,
+   "tables.T-07-01.bands[0,250].slab.Cd_max": 140.0,
+   "tables.T-07-01.bands[250,350].ballast.C_max": 180.0,
+   "tables.T-07-01.bands[250,350].ballast.Cd_max": 88.0,
+   "tables.T-07-01.bands[250,350].slab.C_max": 200.0,
+   "tables.T-07-01.bands[250,350].slab.Cd_max": 140.0,
+   "tables.T-09-01.values[V=200]": 120.0,
+   "tables.T-09-01.values[V=250]": 160.0
+  }
+ },
+ "TR3": {
+  "split": "train",
+  "factors": {
+   "g06": 1.1,
+   "g07": 1.2,
+   "g09": 1.3,
+   "g115": 0.8
+  },
+  "dates": {
+   "eff": "2029년 1월 10일",
+   "issued": "2028년 12월 11일",
+   "before": "2028년 12월 28일",
+   "after": "2029년 1월 22일"
+  },
+  "values": {
+   "constants.L9_min_m": 26.0,
+   "constants.L_vc_min_m": 16.0,
+   "tables.T-06-01.columns.ballast[V=150]": 1200.0,
+   "tables.T-06-01.columns.ballast[V=200]": 2100.0,
+   "tables.T-06-01.columns.ballast[V=250]": 3200.0,
+   "tables.T-06-01.columns.ballast[V=300]": 5000.0,
+   "tables.T-06-01.columns.slab[V=150]": 990.0,
+   "tables.T-06-01.columns.slab[V=200]": 1800.0,
+   "tables.T-06-01.columns.slab[V=250]": 2600.0,
+   "tables.T-06-01.columns.slab[V=300]": 3900.0,
+   "tables.T-07-01.bands[0,250].ballast.C_max": 190.0,
+   "tables.T-07-01.bands[0,250].ballast.Cd_max": 120.0,
+   "tables.T-07-01.bands[0,250].slab.C_max": 220.0,
+   "tables.T-07-01.bands[0,250].slab.Cd_max": 160.0,
+   "tables.T-07-01.bands[250,350].ballast.C_max": 190.0,
+   "tables.T-07-01.bands[250,350].ballast.Cd_max": 96.0,
+   "tables.T-07-01.bands[250,350].slab.C_max": 220.0,
+   "tables.T-07-01.bands[250,350].slab.Cd_max": 160.0,
+   "tables.T-09-01.values[V=200]": 130.0,
+   "tables.T-09-01.values[V=250]": 170.0
+  }
+ },
+ "TR4": {
+  "split": "train",
+  "factors": {
+   "g06": 1.2,
+   "g07": 1.3,
+   "g09": 0.8,
+   "g115": 0.9
+  },
+  "dates": {
+   "eff": "2027년 7월 1일",
+   "issued": "2027년 6월 2일",
+   "before": "2027년 6월 18일",
+   "after": "2027년 7월 15일"
+  },
+  "values": {
+   "constants.L9_min_m": 16.0,
+   "constants.L_vc_min_m": 18.0,
+   "tables.T-06-01.columns.ballast[V=150]": 1300.0,
+   "tables.T-06-01.columns.ballast[V=200]": 2300.0,
+   "tables.T-06-01.columns.ballast[V=250]": 3500.0,
+   "tables.T-06-01.columns.ballast[V=300]": 5400.0,
+   "tables.T-06-01.columns.slab[V=150]": 1080.0,
+   "tables.T-06-01.columns.slab[V=200]": 1900.0,
+   "tables.T-06-01.columns.slab[V=250]": 2900.0,
+   "tables.T-06-01.columns.slab[V=300]": 4200.0,
+   "tables.T-07-01.bands[0,250].ballast.C_max": 210.0,
+   "tables.T-07-01.bands[0,250].ballast.Cd_max": 130.0,
+   "tables.T-07-01.bands[0,250].slab.C_max": 230.0,
+   "tables.T-07-01.bands[0,250].slab.Cd_max": 170.0,
+   "tables.T-07-01.bands[250,350].ballast.C_max": 210.0,
+   "tables.T-07-01.bands[250,350].ballast.Cd_max": 104.0,
+   "tables.T-07-01.bands[250,350].slab.C_max": 230.0,
+   "tables.T-07-01.bands[250,350].slab.Cd_max": 170.0,
+   "tables.T-09-01.values[V=200]": 80.0,
+   "tables.T-09-01.values[V=250]": 100.0
+  }
+ },
+ "TR5": {
+  "split": "train",
+  "factors": {
+   "g06": 1.3,
+   "g07": 0.8,
+   "g09": 0.9,
+   "g115": 1.1
+  },
+  "dates": {
+   "eff": "2029년 6월 20일",
+   "issued": "2029년 5월 21일",
+   "before": "2029년 6월 5일",
+   "after": "2029년 8월 2일"
+  },
+  "values": {
+   "constants.L9_min_m": 18.0,
+   "constants.L_vc_min_m": 22.0,
+   "tables.T-06-01.columns.ballast[V=150]": 1400.0,
+   "tables.T-06-01.columns.ballast[V=200]": 2500.0,
+   "tables.T-06-01.columns.ballast[V=250]": 3800.0,
+   "tables.T-06-01.columns.ballast[V=300]": 5900.0,
+   "tables.T-06-01.columns.slab[V=150]": 1170.0,
+   "tables.T-06-01.columns.slab[V=200]": 2100.0,
+   "tables.T-06-01.columns.slab[V=250]": 3100.0,
+   "tables.T-06-01.columns.slab[V=300]": 4600.0,
+   "tables.T-07-01.bands[0,250].ballast.C_max": 130.0,
+   "tables.T-07-01.bands[0,250].ballast.Cd_max": 80.0,
+   "tables.T-07-01.bands[0,250].slab.C_max": 140.0,
+   "tables.T-07-01.bands[0,250].slab.Cd_max": 100.0,
+   "tables.T-07-01.bands[250,350].ballast.C_max": 130.0,
+   "tables.T-07-01.bands[250,350].ballast.Cd_max": 64.0,
+   "tables.T-07-01.bands[250,350].slab.C_max": 140.0,
+   "tables.T-07-01.bands[250,350].slab.Cd_max": 100.0,
+   "tables.T-09-01.values[V=200]": 90.0,
+   "tables.T-09-01.values[V=250]": 120.0
+  }
+ },
+ "SM1": {
+  "split": "smoke",
+  "factors": {
+   "g06": 1.4,
+   "g07": 1.4,
+   "g09": 1.4,
+   "g115": 1.4
+  },
+  "dates": {
+   "eff": "2027년 10월 5일",
+   "issued": "2027년 9월 6일",
+   "before": "2027년 9월 21일",
+   "after": "2027년 10월 19일"
+  },
+  "values": {
+   "constants.L9_min_m": 28.0,
+   "constants.L_vc_min_m": 28.0,
+   "tables.T-06-01.columns.ballast[V=150]": 1500.0,
+   "tables.T-06-01.columns.ballast[V=200]": 2700.0,
+   "tables.T-06-01.columns.ballast[V=250]": 4100.0,
+   "tables.T-06-01.columns.ballast[V=300]": 6300.0,
+   "tables.T-06-01.columns.slab[V=150]": 1260.0,
+   "tables.T-06-01.columns.slab[V=200]": 2200.0,
+   "tables.T-06-01.columns.slab[V=250]": 3400.0,
+   "tables.T-06-01.columns.slab[V=300]": 4900.0,
+   "tables.T-07-01.bands[0,250].ballast.C_max": 220.0,
+   "tables.T-07-01.bands[0,250].ballast.Cd_max": 140.0,
+   "tables.T-07-01.bands[0,250].slab.C_max": 250.0,
+   "tables.T-07-01.bands[0,250].slab.Cd_max": 180.0,
+   "tables.T-07-01.bands[250,350].ballast.C_max": 220.0,
+   "tables.T-07-01.bands[250,350].ballast.Cd_max": 112.0,
+   "tables.T-07-01.bands[250,350].slab.C_max": 250.0,
+   "tables.T-07-01.bands[250,350].slab.Cd_max": 180.0,
+   "tables.T-09-01.values[V=200]": 140.0,
+   "tables.T-09-01.values[V=250]": 180.0
+  }
+ },
+ "TE1": {
+  "split": "test",
+  "factors": {
+   "g06": 0.85,
+   "g07": 1.15,
+   "g09": 0.85,
+   "g10": 1.15,
+   "g112": 0.85,
+   "g114": 1.15,
+   "g115": 0.85
+  },
+  "dates": {
+   "eff": "2028년 11월 12일",
+   "issued": "2028년 10월 13일",
+   "before": "2028년 11월 2일",
+   "after": "2028년 11월 24일"
+  },
+  "values": {
+   "constants.L9_min_m": 17.0,
+   "constants.L_vc_min_m": 17.0,
+   "constants.Rv_cap_ballast_m": 28500.0,
+   "constants.Rv_cap_slab_m": 46500.0,
+   "tables.T-06-01.columns.ballast[V=150]": 950.0,
+   "tables.T-06-01.columns.ballast[V=200]": 1650.0,
+   "tables.T-06-01.columns.ballast[V=250]": 2450.0,
+   "tables.T-06-01.columns.ballast[V=300]": 3850.0,
+   "tables.T-06-01.columns.slab[V=150]": 765.0,
+   "tables.T-06-01.columns.slab[V=200]": 1350.0,
+   "tables.T-06-01.columns.slab[V=250]": 2050.0,
+   "tables.T-06-01.columns.slab[V=300]": 2950.0,
+   "tables.T-07-01.bands[0,250].ballast.C_max": 185.0,
+   "tables.T-07-01.bands[0,250].ballast.Cd_max": 115.0,
+   "tables.T-07-01.bands[0,250].slab.C_max": 205.0,
+   "tables.T-07-01.bands[0,250].slab.Cd_max": 145.0,
+   "tables.T-07-01.bands[250,350].ballast.C_max": 185.0,
+   "tables.T-07-01.bands[250,350].ballast.Cd_max": 93.0,
+   "tables.T-07-01.bands[250,350].slab.C_max": 205.0,
+   "tables.T-07-01.bands[250,350].slab.Cd_max": 145.0,
+   "tables.T-09-01.values[V=200]": 85.0,
+   "tables.T-09-01.values[V=250]": 115.0,
+   "tables.T-10-01.rows.emu_only.value": 41.0,
+   "tables.T-10-01.rows.mixed.value": 29.0,
+   "tables.T-10-01.rows.passenger_only.value": 41.0,
+   "tables.T-11-02.columns.ballast[V=200]": 11500.0,
+   "tables.T-11-02.columns.ballast[V=250]": 18500.0,
+   "tables.T-11-02.columns.slab[V=200]": 11500.0,
+   "tables.T-11-02.columns.slab[V=250]": 18500.0
+  }
+ },
+ "TE2": {
+  "split": "test",
+  "factors": {
+   "g06": 1.25,
+   "g07": 0.95,
+   "g09": 1.25,
+   "g10": 0.95,
+   "g112": 1.25,
+   "g114": 0.95,
+   "g115": 1.25
+  },
+  "dates": {
+   "eff": "2030년 2월 8일",
+   "issued": "2030년 1월 9일",
+   "before": "2029년 10월 30일",
+   "after": "2030년 2월 19일"
+  },
+  "values": {
+   "constants.L9_min_m": 25.0,
+   "constants.L_vc_min_m": 25.0,
+   "constants.Rv_cap_ballast_m": 23500.0,
+   "constants.Rv_cap_slab_m": 38500.0,
+   "tables.T-06-01.columns.ballast[V=150]": 1350.0,
+   "tables.T-06-01.columns.ballast[V=200]": 2350.0,
+   "tables.T-06-01.columns.ballast[V=250]": 3650.0,
+   "tables.T-06-01.columns.ballast[V=300]": 5650.0,
+   "tables.T-06-01.columns.slab[V=150]": 1125.0,
+   "tables.T-06-01.columns.slab[V=200]": 2050.0,
+   "tables.T-06-01.columns.slab[V=250]": 3050.0,
+   "tables.T-06-01.columns.slab[V=300]": 4350.0,
+   "tables.T-07-01.bands[0,250].ballast.C_max": 155.0,
+   "tables.T-07-01.bands[0,250].ballast.Cd_max": 95.0,
+   "tables.T-07-01.bands[0,250].slab.C_max": 175.0,
+   "tables.T-07-01.bands[0,250].slab.Cd_max": 125.0,
+   "tables.T-07-01.bands[250,350].ballast.C_max": 155.0,
+   "tables.T-07-01.bands[250,350].ballast.Cd_max": 77.0,
+   "tables.T-07-01.bands[250,350].slab.C_max": 175.0,
+   "tables.T-07-01.bands[250,350].slab.Cd_max": 125.0,
+   "tables.T-09-01.values[V=200]": 125.0,
+   "tables.T-09-01.values[V=250]": 165.0,
+   "tables.T-10-01.rows.emu_only.value": 33.0,
+   "tables.T-10-01.rows.mixed.value": 23.0,
+   "tables.T-10-01.rows.passenger_only.value": 33.0,
+   "tables.T-11-02.columns.ballast[V=200]": 17500.0,
+   "tables.T-11-02.columns.ballast[V=250]": 27500.0,
+   "tables.T-11-02.columns.slab[V=200]": 17500.0,
+   "tables.T-11-02.columns.slab[V=250]": 27500.0
+  }
+ }
+}

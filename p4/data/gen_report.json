@@ -1,0 +1,39 @@
+{
+ "engine_mismatch": [],
+ "sanity_fail": [],
+ "roundtrip_fail": [],
+ "source_not_in_document": [],
+ "shared_values": [],
+ "shared_dates": [],
+ "order_broken": [],
+ "counts": {
+  "train_items": 450,
+  "test_items": 414,
+  "smoke_items": 90,
+  "test_by_table": {
+   "TE1": 162,
+   "TE2": 162,
+   "T0": 90
+  },
+  "test_by_rule_group": {
+   "trained": 230,
+   "heldout": 184
+  },
+  "test_by_set": {
+   "C": 54,
+   "A_target": 108,
+   "A_neighbour": 90,
+   "T": 162
+  },
+  "train_by_set": {
+   "C": 50,
+   "A_target": 100,
+   "A_neighbour": 100,
+   "T": 200
+  },
+  "test_pairs": 2484,
+  "test_violation_pairs": 1242,
+  "train_pairs": 2700,
+  "heldout_rule_items_new_tables": 144
+ }
+}

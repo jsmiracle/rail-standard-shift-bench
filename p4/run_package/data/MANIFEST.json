@@ -1,0 +1,12 @@
+{
+ "source": "P4 generator research/pilot_P4/code/p4gen (deterministic); engine tag engine-ref-7fed2c6 used for the gold cross-check only",
+ "note": "Test gold (gold_test.jsonl) is not in this package. train.jsonl holds the gold of the TRAINING tables only; training and test tables share no limit value and no date.",
+ "sha256": {
+  "items_test.jsonl": "fb84400515b121b3d27eef3ee4c482bc60b2713c285339c61d496fad2f50f973",
+  "train.jsonl": "ac913327832846cecf63eb57bafa3fd6e288810a3a571b4579dfb67ee0a0e3d2",
+  "smoke_train.jsonl": "b6a6600e6f255934c4a4c0c7ac988683f760fc19a390a5123e6429f94c934517",
+  "smoke_test.jsonl": "c82f572cb5dd2556ba48047307529040b9322254ef4e05654c38f3856f112c50",
+  "closedbook_items.jsonl": "5f22b844fcc294a9acfc76d53cfbbd843b5d218a3fe41e2738b67704577ab315"
+ },
+ "gold_test_sha256_not_shipped": "c89924c8ea0dc119848267b38b163f2c005c75d8d319d637a375b6876237a024"
+}
